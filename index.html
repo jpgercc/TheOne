@@ -3,15 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar Funcionário à Lista</title>
+    <title>Adicionar Funcionário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        .funcionario-item {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <ul id="listaFuncionarios"></ul>
-    <input type="text" id="nomeFuncionario" placeholder="Digite o nome">
-    <input type="text" id="salarioFuncionario" placeholder="Digite o salário">
-    <input type="text" id="funcaoFuncionario" placeholder="Digite a função">
-    <button id="adicionarFuncionario">Adicionar Funcionário</button>
+    <form id="formularioFuncionario" action="#" method="POST" onsubmit="adicionarItem(); return false;">
+        <input type="text" id="nomeFuncionario" placeholder="Digite o nome" required>
+        <input type="text" id="salarioFuncionario" placeholder="Digite o salário" required>
+        <input type="text" id="funcaoFuncionario" placeholder="Digite a função" required>
+        <button type="submit">Adicionar Funcionário</button>
+    </form>
 
-    <script src="texte.js"></script>
+    <ul id="listaFuncionarios">
+    </ul>
+
+    <script>
+        function adicionarItem() {
+            const nome = document.getElementById('nomeFuncionario').value.trim();
+            const salario = document.getElementById('salarioFuncionario').value.trim();
+            const funcao = document.getElementById('funcaoFuncionario').value.trim();
+
+            if (nome !== '' && salario !== '' && funcao !== '') {
+                const lista = document.getElementById('listaFuncionarios');
+                const novoItem = document.createElement('li');
+                novoItem.classList.add('funcionario-item');
+                novoItem.textContent = `Nome: ${nome}, Salário: R$${salario}, Função: ${funcao}`;
+                lista.appendChild(novoItem);
+
+                document.getElementById('nomeFuncionario').value = '';
+                document.getElementById('salarioFuncionario').value = '';
+                document.getElementById('funcaoFuncionario').value = '';
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        }
+    </script>
 </body>
 </html>
